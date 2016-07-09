@@ -1,0 +1,50 @@
+
+<li> <a href="{% url 'battles:clan_wars' %}"> Clan wars </a></li>
+<li> <a href="{% url 'battles:ter_battles'%}"> Teritory battles </a></li>
+
+
+
+<!--  {% if battles %}
+    <ul>
+    {% for batlle in battles %}
+	<li><a href="{% url 'battles:battle_details' batlle.id %}">{{ batlle }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No battles are available.</p>
+{% endif %}
+
+
+<button id="add_territory_battle">Add a new territory batlle</button>
+<button id="add_clan_war">Add a new clan war</button>
+
+<form action="{% url 'battles:add_territory_battle' %}" style="display:none" method="POST" id="new_battle_form">
+{% csrf_token %}
+{{territory_form.as_p}}
+<input type="submit" value="Submit">
+</form>	
+
+<form action="{% url 'battles:add_clan_war_battle' %}" style="display:none" method="POST" id="new_clan_war_form">
+{% csrf_token %}
+{{clan_war_form.as_p}}
+<input type="submit" value="Submit">
+</form>	
+
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script>
+$( "#add_territory_battle" ).click(function() {
+	$('#new_battle_form').show();
+	$('#add_territory_battle').hide();
+	$('#add_clan_war').show();
+	$('#new_clan_war_form').hide();
+})
+
+$( "#add_clan_war" ).click(function() {
+	$('#new_clan_war_form').show();
+	$('#add_clan_war').hide();
+	$('#add_territory_battle').show();
+	$('#new_battle_form').hide();
+})
+</script> -->

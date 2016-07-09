@@ -1,0 +1,32 @@
+ {% if battles %}
+    <ul>
+    {% for batlle in battles %}
+	<li><a href="{% url 'battles:ter_battle_details' batlle.id %}">{{ batlle }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No battles are available.</p>
+{% endif %}
+
+
+<button id="add_territory_battle">Add a new territory batlle</button>
+<form action="{% url 'battles:add_territory_battle' %}" style="display:none" method="POST" id="new_battle_form">
+{% csrf_token %}
+{{territory_form.as_p}}
+<input type="submit" value="Submit">
+</form>	
+
+
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script>
+$(function() {
+    $( "#add_territory_battle" ).click(function() {
+    	$('#new_battle_form').show();
+    	$('#add_territory_battle').hide();
+    	$('#add_clan_war').show();
+    	$('#new_clan_war_form').hide();
+    });
+});
+</script>

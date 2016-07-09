@@ -1,0 +1,50 @@
+
+{% load staticfiles %}
+
+<link rel='stylesheet' href="{% static 'memberSchedule/cal/fullcalendar.css' %}" />
+<script src="{% static 'memberSchedule/cal/lib/jquery.min.js' %}"></script>
+<script src="{% static 'memberSchedule/cal/lib/moment.min.js' %}"></script>
+<script src="{% static 'memberSchedule/cal/fullcalendar.js' %}"></script>
+<h2><i>Enter the dates, in which you are available</i></h2>
+
+<div id='calendar'></div>
+
+
+<script> 
+$(function() {
+    // page is now ready, initialize the calendar...
+   $('#calendar').fullCalendar({
+    editable: true,
+    weekNumbers:true,
+    eventClick: function() {
+    },
+    dayClick: function(date, jsEvent, view) {
+
+        // alert(date.format())
+
+        var start = prompt('Start time: (hh:mm)' ),
+            end   = prompt('End time: (hh:mm)'),
+            daySquare = $(this);
+
+        if (start != null && end !=null) {
+            $.post({
+                url: "{% url 'memberSchedule:add_availability' %}",
+                data: {
+                    'day':  date.format(),
+                    'start_time': start,
+                    'end_time': end,
+                     csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function(data) {
+                     daySquare.css('background-color', 'blue');
+                }
+            });
+        }else{
+            alert('Fill both end and start time')
+        }
+
+    }
+});
+
+});
+</script>

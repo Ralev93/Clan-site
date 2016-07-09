@@ -1,0 +1,19 @@
+<form action="{% url 'basic:login_handle' %}" method="post" accept-charset="utf-8">
+    {% csrf_token %}
+    {% for field in form %}
+        <label>{{ field.label }}</label>
+        {% if field.errors %}
+            {{ field.errors }}
+        {% endif %}
+        {{ field }}
+    {% endfor %}
+    <input type="hidden" name="next" value="{% url 'index' %}" />
+    <input class="button small" type="submit" value="Submit"/>
+</form>
+
+
+<p>OR</p>
+
+<a href="{% url 'register' %}">
+    <button id="register">Register</button>
+</a>

@@ -1,0 +1,10 @@
+
+<h2>{{ rule.content}}</h2>
+
+<li>Created by: 
+	{%if rule.created_by.get_full_name%}
+		{{ rule.created_by.get_full_name }}
+	{%else %}
+		{{rule.created_by.get_username}}
+	{%endif%}
+	</li>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <title>{% block title %}Freedoom's clan site{% endblock %}</title>
+</head>
+
+<body>
+    <div id="sidebar">
+        {% block sidebar %}
+        
+        {% load staticfiles %}
+            <h2> <img src="{% static 'freedoom.jpg' %}"></img>  Welcome to Freedoom's clan site! </h2>
+            <li> <a href="/basic/users"> Members </a></li>
+            <li> <a href="/basic/battles"> Battles </a></li>
+            <li> <a href="/basic/rules"> Rules </a></li>
+            <li> <a href="/basic/calendar"> Calendar </a></li>
+
+        {% endblock %}
+    </div>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+ {% if rules %}
+    <ul>
+    {% for rule in rules %}
+        <li><a href="{% url 'basic:rule_detail' rule.id %}">{{ rule.content }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No rules are available.</p>
+{% endif %}
+
+
+<button id="add_rule">Add a new rule</button>
+<form action="{% url 'basic:add_rule' %}" style="display:none" method="POST" id="new_rule_form">
+{% csrf_token %}
+{{form}}
+<input type="submit" value="Submit">
+</form>	
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script>
+$( "#add_rule" ).click(function() {
+	$('#new_rule_form').show();
+})
+</script>

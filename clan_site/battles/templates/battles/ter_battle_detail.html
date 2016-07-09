@@ -1,0 +1,43 @@
+
+<h2>{{ battle }} </h2>
+<p>{{battle.get_status_display}}</p>
+<label>Assigned users: 
+{% for member in battle.assigned_users.all %}
+	<li><a href="{% url 'basic:user_detail' member.id %}">{{ member.get_username }}</a></li>
+{% endfor %}
+</label>
+
+
+{%ifequal battle.status 'O'%}
+	<label>Hypothesis:</label>
+
+	<form action="{% url 'battles:add_hypothesis' battle.id %}" method="POST" id="hypothesis_form">
+		{% csrf_token %}
+		{{form.as_p}}
+		<input type="submit" value="Submit">
+	</form>	
+{%endifequal%}
+
+
+
+<!-- todo: add to static! -->
+<button id="auto_assign">Assign</button> 
+
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script>
+    $( "#add_territory_battle" ).click(function() {
+        $('#new_battle_form').show();
+        $('#add_territory_battle').hide();
+    });
+
+    $('#auto_assign').click(function () {
+        $.ajax({
+          url: "{% url 'battles:assign' battle.id %}"
+        }).success(function(data) {
+          alert("Oh my" + data);
+        });
+    })
+
+</script>

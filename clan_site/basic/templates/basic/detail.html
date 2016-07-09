@@ -1,0 +1,11 @@
+
+<h2>{{ user.get_full_name }}</h2>
+
+<li>Photo: "{{ user.photo.name }}"</li>
+{% load staticfiles %}
+<li> Photo: <img src="{% static user.photo.name %}"></img> </li>
+
+
+<li>Username: {{ user.get_username }}</li>
+<li>Member's rank: {{ user.get_user_type_display }}</li>
+<li>Date joined: {{ user.date_joined }}</li>

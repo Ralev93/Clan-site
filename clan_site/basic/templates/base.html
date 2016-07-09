@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <title>{% block title %}Freedoom's clan site{% endblock %}</title>
+</head>
+
+<body>
+    <div class="topcorner">
+        <a href="{% url 'basic:logout'%}">Log out</a>
+        <a href="{% url 'login'%}">Log in</a>
+    </div>
+
+
+    <div id="sidebar">
+        {% block sidebar %}
+        
+        {% load staticfiles %}
+            <h2> 
+                <a href="{% url 'basic:index' %}">
+                 <img src="{% static 'basic/freedoom.jpg' %}"></img>
+                </a>  Welcome to Freedoom's clan site!  {{request.user}}
+            </h2>
+            <li> <a href="{% url 'basic:users' %}"> Members </a></li>
+            <li> <a href="{% url 'battles:battles' %}"> Battles </a></li>
+            <li> <a href="{% url 'basic:rules' %}"> Rules </a></li>
+            <li> <a href="{% url 'memberSchedule:schedule' %}"> Calendar </a></li>
+        {% endblock %}
+    </div>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
+
+<style type="text/css">
+ .topcorner{
+   position:absolute;
+   top:0;
+   right:0;
+  }
+</style>
