@@ -13,8 +13,8 @@ class Territory(models.Model):
 
     planet=models.CharField(max_length=1, choices=PLANET_CHOICES)
     name=models.CharField(max_length=50)
-    time_for_preparation=models.DateTimeField(blank=True, null=True) #todo to be: models.DurationField?
-    time_for_battle=models.DateTimeField(blank=True, null=True)
+    time_for_preparation=models.DurationField(blank=True, null=True) #todo to be: models.DurationField?
+    time_for_battle=models.DurationField(blank=True, null=True)
 
     def get_name(self):
         return self.name

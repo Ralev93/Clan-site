@@ -17,7 +17,6 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return '';
 
-
 class UsersView(generic.ListView):
     template_name = 'basic/users.html'
     context_object_name = 'users'
@@ -37,15 +36,12 @@ class RulesView(generic.ListView):
         context['form'] = RulesForm()
         return context
 
-#
-# @login_required
 class RulesDetailView(generic.DetailView):
     model = Rules
     context_object_name='rule'
     template_name = 'basic/rules_detail.html'
 
 
-# @login_required
 class DetailView(generic.DetailView):
     model = Member
     context_object_name='user'
@@ -53,7 +49,7 @@ class DetailView(generic.DetailView):
 
 
 
-# @login_required
+@login_required
 def add_rule(request):
     if request.method == 'POST':
         form = RulesForm(request.POST)

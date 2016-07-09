@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+<header>
+    {% load staticfiles %}
+
+    <a class="logo" href="{% url 'basic:index' %}"><img alt="Logo" src="{% static 'basic/freedoom.jpg' %}"/></a>
+    <h1>Freedoom</h1>
+    <h2>Welcome to Freedoom's clan site!  {{request.user}}</h2>
+    <div class="topcorner">
+        <nav>
+            <ul>
+                <li><a href="{% url 'login'%}">Log in</a></li>
+                <li><a href="{% url 'login'%}">Register</a></li> 
+                <li> <a href="{% url 'basic:logout'%}">Log out</a></li>
+            </ul>
+        </nav>
+    </div>
+
+</header>
 <head>
     <link rel="stylesheet" href="style.css" />
     <title>{% block title %}Freedoom's clan site{% endblock %}</title>
 </head>
 
 <body>
-    <div class="topcorner">
-        <a href="{% url 'basic:logout'%}">Log out</a>
-        <a href="{% url 'login'%}">Log in</a>
-    </div>
-
-
-    <div id="sidebar">
+     <div id="sidebar">
         {% block sidebar %}
-        
-        {% load staticfiles %}
-            <h2> 
-                <a href="{% url 'basic:index' %}">
-                 <img src="{% static 'basic/freedoom.jpg' %}"></img>
-                </a>  Welcome to Freedoom's clan site!  {{request.user}}
-            </h2>
-            <li> <a href="{% url 'basic:users' %}"> Members </a></li>
-            <li> <a href="{% url 'battles:battles' %}"> Battles </a></li>
-            <li> <a href="{% url 'basic:rules' %}"> Rules </a></li>
-            <li> <a href="{% url 'memberSchedule:schedule' %}"> Calendar </a></li>
+            <nav>
+                <ul>
+                    <li> <a href="{% url 'basic:users' %}"> Members </a></li>
+                    <li> <a href="{% url 'battles:battles' %}"> Battles </a></li>
+                    <li> <a href="{% url 'basic:rules' %}"> Rules </a></li>
+                    <li> <a href="{% url 'memberSchedule:schedule' %}"> Calendar </a></li>
+                </ul>
+            </nav>
         {% endblock %}
     </div>
 

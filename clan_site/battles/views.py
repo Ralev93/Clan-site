@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+
 from django.views import generic
 
 from .models import *
@@ -44,6 +46,7 @@ class ClanWarDetailView(generic.DetailView):
     model = ClanWar
     context_object_name='battle'
 
+
 class TerBattleDetailView(generic.DetailView):
     template_name='battles/ter_battle_detail.html'
     model = TerritoryBattle
@@ -54,7 +57,7 @@ class TerBattleDetailView(generic.DetailView):
         context['form'] = HypothesisForm()
         return context
   
-
+@login_required
 def add_territory_battle(request):
     if request.method == 'POST':
         form = TerritoryBattleForm(request.POST)
@@ -81,7 +84,7 @@ def add_territory_battle(request):
     return render(request, TerBattlesView.template_name, {'territory_form': form, 'battles': TerritoryBattle.objects.all()})
     #todo: Refactor!!!
 
-
+@login_required
 def add_clan_war_battle(request):
     if request.method == 'POST':
         form = ClanWarForm(request.POST)
@@ -100,7 +103,7 @@ def add_clan_war_battle(request):
     return render(request, ClanWarsView.template_name, {'clan_war_form': form, 'battles':ClanWar.objects.all()})
     # todo Refactor the 'battles'
 
-
+@login_required
 def add_hypothesis(request, battle_id):
     if request.method == 'POST':
         form = HypothesisForm(request.POST)
@@ -122,7 +125,7 @@ def add_hypothesis(request, battle_id):
     #todo: Refactor!!!
 
 
-
+@login_required
 def assign_members(request, battle_id):
     return render(request, TerBattlesView.template_name, {'territory_form': form, 'battles': TerritoryBattle.objects.all()})
     #todo: Refactor!!!

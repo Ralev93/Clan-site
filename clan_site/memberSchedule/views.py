@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 
 from basic.models import *
 from .models import *
@@ -18,7 +19,7 @@ class ScheduleIndexView(generic.ListView):
         return '';
 
 
-
+@login_required
 def add_availability(request):
     if request.method == 'POST':
         start, end, day = request.POST['start_time'], request.POST['end_time'], request.POST['day']

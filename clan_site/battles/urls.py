@@ -6,11 +6,11 @@ from . import views
 app_name='battles'
 
 urlpatterns = [
-    url(r'^$', views.BattlesIndexView.as_view(), name='battles'),
+    url(r'^$', login_required(views.BattlesIndexView.as_view()), name='battles'),
     url(r'^clan_wars/$', login_required(views.ClanWarsView.as_view()), name='clan_wars'),
-    url(r'^ter_battles/$', views.TerBattlesView.as_view(), name='ter_battles'),
-    url(r'^clan_wars/(?P<pk>[0-9]+)/$', views.ClanWarDetailView.as_view(), name='clan_war_details'),
-    url(r'^ter_battles/(?P<pk>[0-9]+)/$', views.TerBattleDetailView.as_view(), name='ter_battle_details'),
+    url(r'^ter_battles/$', login_required(views.TerBattlesView.as_view()), name='ter_battles'),
+    url(r'^clan_wars/(?P<pk>[0-9]+)/$', login_required(views.ClanWarDetailView.as_view()), name='clan_war_details'),
+    url(r'^ter_battles/(?P<pk>[0-9]+)/$', login_required(views.TerBattleDetailView.as_view()), name='ter_battle_details'),
     url(r'^ter_battles/(?P<pk>[0-9]+)/$', views.assign_members, name='assign'),
 
 
